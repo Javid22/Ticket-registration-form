@@ -13,8 +13,7 @@
 	$_SESSION['user'] = $row['user_name'];
 ?>
   <head>
-      <title>Page Title</title> 
-		  <link rel="stylesheet" type="text/css" href="style.php">
+	  <link rel="stylesheet" type="text/css" href="style.php">
   </head>
 	<body>
 	    <div class="container">
