@@ -1,6 +1,5 @@
 <html>
 <head>
-	<title>Page Title</title> 
 	<link rel="stylesheet" type="text/css" href="style.php">
 </head>
 
