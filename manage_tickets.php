@@ -5,34 +5,35 @@
 ?>
 
 <head>
+	<title>Page Title</title> 
 	<link rel="stylesheet" type="text/css" href="style.php">	
 </head>
 
 <?php
-	//Assign parameter for server
-	$data_array = array(
-		'department'  => $_POST['department'],
-		'category'    => $_POST['category'],
-		'subject'     => $_POST['name'],
-		'description' => $_POST['description'],
-		'username'    => $_SESSION['user'],
-		'email'       => $_SESSION['email'],
-		'phone'       => $_POST['phone'],
-		'Priority'    => $_POST['Priority']
-	);
-	//Sending data in POST method
-	$url="zoho desk api";
- 	$data = http_build_query($data_array);
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$result = curl_exec($ch);
-	$decode =  json_decode($result,true);
-	print_r($decode);
-	curl_close($ch);
+        
+
+        
+$url = "https://desk.zoho.in/api/v1/tickets";
+
+$curl = curl_init($url);
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+$headers = array(
+   "orgId:60001280952",
+   "Authorization: 9446933330c7f886fbdf16782906a9e0",
+);
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+//for debug only!
+curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+$resp = curl_exec($curl);
+$result = json_decode( $resp,true); 
+curl_close($curl);         
+
 ?>
+
 
 <body> 
 	<!-- Result will be displayed to user -->
@@ -43,7 +44,10 @@
 	<div style="margin-left:25%;margin-top:20%;width:800px;" class="box" >
 		<h1>Ticket Details</h1>
 		<p style="color:white;"><u>ticket status </u></p>
-		<p><?php //Response values are display here ?> </p>
+		<p style="float:left;margin-left:40px;color:white;"><?php echo 'Test Ticket ' .' - '.$result['data']['0']['status']; ?>
+		<p style="float:right;margin-left:-40px;color:white;"><?php  echo $result['data']['0']['ticketNumber']; ?> </p><br><br>
+		<p style="float:left;margin-left:40px;color:white;"><?php  echo $_POST['department'] ;?> </p></p><br>
+		<span style="float:left;margin-left:40px;color:white;"> <?php echo 'Time - '.substr($result['data']['0']['createdTime'],11,8);?><span>
 	</div>
 	</div>
 	</div>
