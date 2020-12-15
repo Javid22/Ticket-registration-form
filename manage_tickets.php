@@ -44,8 +44,9 @@ curl_close($curl);
 	<div style="margin-left:25%;margin-top:20%;width:800px;" class="box" >
 		<h1>Ticket Details</h1>
 		<p style="color:white;"><u>ticket status </u></p>
-		<p style="float:left;margin-left:40px;color:white;"><?php echo 'Test Ticket ' .' - '.$result['data']['0']['status']; ?>
-		<p style="float:right;margin-left:-40px;color:white;"><?php  echo $result['data']['0']['ticketNumber']; ?> </p><br><br>
+		<p style="float:left;margin-left:40px;color:white;"><?php echo 'Test id ' .' - '.$result['data']['0']['id']; ?>
+		<p style="float:right;margin-left:-20px;color:white;"><?php  echo $result['data']['0']['ticketNumber']; ?> </p></p><br></br>
+		<p style="float:left;margin-left:40px;color:white;"><?php echo 'Status' .' - '.$result['data']['0']['status']; ?></p><br><br>
 		<p style="float:left;margin-left:40px;color:white;"><?php  echo $_POST['department'] ;?> </p></p><br>
 		<span style="float:left;margin-left:40px;color:white;"> <?php echo 'Time - '.substr($result['data']['0']['createdTime'],11,8);?><span>
 	</div>
